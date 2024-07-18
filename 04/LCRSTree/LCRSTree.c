@@ -64,4 +64,10 @@ void LCRS_PrintTree( LCRSNode* Node, int Depth )
     if ( Node->RightSibling != NULL )
         LCRS_PrintTree(Node->RightSibling, Depth);
 }
+/*
+//특정 레벨의 모든 노드를 출력하는 함수 구현
+void LCRS_PrintNodesAtLevel(int Level)
+{
 
+}
+*/
