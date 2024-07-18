@@ -6,7 +6,7 @@
 
     노드 표현 방법 1)N-link
                 2)왼쪽 자식 - 오른쪽 형제
-    
+
     1) N-link
         노드의 차수가 N개라면  N개가 각각 자식 노드를 가리키는 노드를 구성하는 방법.
 
@@ -82,27 +82,35 @@ void LCRS_PrintTree(LCRSNode* Node, int Depth)
 
     if (Depth > 0) printf("+--");
 
-    printf("%c\n",Node->Data);
+    printf("%c\n", Node->Data);
 
     if(Node->LeftChild != NULL) LCRS_PrintTree(Node->LeftChild,Depth+1);
     if(Node->RightSibling != NULL) LCRS_PrintTree(Node->RightSibling,Depth);
 }
 
 //특정 레벨의 모든 노드를 출력하는 함수 구현
-void LCRS_PrintNodesAtLevel(LCRSNode* Root, int Level)
+void printNodesAtLevel(LCRSNode* Root, int Level)
 {
-    LCRSNode* TempNode = Root->LeftChild;
-    while(Level == 0)
-    {
-        TempNode = TempNode->LeftChild;
-        Level--;
-    }
+    if(Root == NULL) return;
 
-    while (TempNode->RightSibling != NULL)
-    {
-        printf("%c\n",TempNode->Data);
-        TempNode = TempNode->RightSibling;
+    if (Level == 0) printf("%c\n", Root->Data);
+    else
+    {   
+        if(Root->LeftChild!=NULL)
+        {
+            printNodesAtLevel(Root->LeftChild, Level - 1);
+        }
+        if(Root->RightSibling != NULL)
+        {
+            printNodesAtLevel(Root->RightSibling, Level);
+        }
     }
+}
+
+void LCRS_PrintNodesAtLevel(LCRSNode* Root, int level)
+{
+    printNodesAtLevel(Root, level);
+    printf("\n");
 }
 
 
@@ -131,7 +139,8 @@ int main(void)
     LCRS_PrintTree(Root,0);
 
     printf("\n");
-    LCRS_PrintNodesAtLevel(Root,2);
+    //LCRS_PrintNodesAtLevel(Root, 3);
+    printNodesAtLevel(Root,3);
 
     LCRS_DestroyTree(Root);
 

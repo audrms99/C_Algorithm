@@ -39,8 +39,9 @@ void LCRS_AddChildNode( LCRSNode* Parent, LCRSNode *Child)
     {
         LCRSNode* TempNode = Parent->LeftChild;
         while ( TempNode->RightSibling != NULL )
+        {    
             TempNode = TempNode->RightSibling;
-
+        }
         TempNode->RightSibling = Child;        
     }
 }
@@ -48,7 +49,7 @@ void LCRS_AddChildNode( LCRSNode* Parent, LCRSNode *Child)
 void LCRS_PrintTree( LCRSNode* Node, int Depth )
 {
     // 들여쓰기
-    int i=0; 
+    int i=0;
     for ( i=0; i<Depth-1; i++ )
         printf("   "); // 공백 3칸
 
