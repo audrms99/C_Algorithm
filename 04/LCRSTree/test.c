@@ -96,21 +96,33 @@ void printNodesAtLevel(LCRSNode* Root, int Level)
     if (Level == 0) printf("%c\n", Root->Data);
     else
     {   
-        if(Root->LeftChild!=NULL)
-        {
-            printNodesAtLevel(Root->LeftChild, Level - 1);
-        }
-        if(Root->RightSibling != NULL)
-        {
-            printNodesAtLevel(Root->RightSibling, Level);
-        }
+        printNodesAtLevel(Root->LeftChild, Level - 1);
     }
+    //부모 기준 자식들도 확인을 해줘야 한다.
+    printNodesAtLevel(Root->RightSibling, Level);
+    
 }
 
 void LCRS_PrintNodesAtLevel(LCRSNode* Root, int level)
 {
     printNodesAtLevel(Root, level);
     printf("\n");
+}
+
+//트리 길이 출력
+void PrintTreeLength(LCRSNode* Root)
+{
+    LCRSNode* TempNode = Root;
+
+    int cnt = 0;
+    
+    while(TempNode != NULL)
+    {
+        TempNode = TempNode->LeftChild;
+        cnt++;
+    }
+
+    printf("뿌리 미포함:%d\n뿌리 포함해서:%d\n",cnt,cnt + 1);
 }
 
 
@@ -139,9 +151,9 @@ int main(void)
     LCRS_PrintTree(Root,0);
 
     printf("\n");
-    //LCRS_PrintNodesAtLevel(Root, 3);
+    //LCRS_PrintNodesAtLevel(Root, 1);
     printNodesAtLevel(Root,3);
-
+    PrintTreeLength(Root);
     LCRS_DestroyTree(Root);
 
     return 0;
