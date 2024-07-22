@@ -100,7 +100,7 @@ double ET_Evaluate( ETNode* Tree )
             Left  = ET_Evaluate( Tree->Left );
             Right = ET_Evaluate( Tree->Right );
 
-                 if ( Tree->Data == '+' ) Result = Left + Right;
+                if ( Tree->Data == '+' ) Result = Left + Right;
             else if ( Tree->Data == '-' ) Result = Left - Right;
             else if ( Tree->Data == '*' ) Result = Left * Right;
             else if ( Tree->Data == '/' ) Result = Left / Right;            
