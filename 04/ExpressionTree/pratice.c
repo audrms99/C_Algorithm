@@ -12,6 +12,8 @@ typedef struct tagETNode
     ElementType Data;
 } ETNode;
 
+//------------------------------------------------------------------
+
 ETNode *ET_CreateNode(ElementType NewData)
 {
     ETNode *NewNode = (ETNode *)malloc(sizeof(ETNode));
@@ -19,10 +21,9 @@ ETNode *ET_CreateNode(ElementType NewData)
     NewNode->Right = NULL;
 
     NewNode->Data = NewData;
+
     return NewNode;
 }
-
-//------------------------------------------------------------------
 
 void ET_DestroyNode(ETNode *Node)
 {
@@ -37,6 +38,41 @@ void ET_DestroyTree(ETNode *Root)
     ET_DestroyTree(Root->Left);
     ET_DestroyTree(Root->Right);
     ET_DestroyNode(Root);
+}
+
+void ET_PreorderPrintTree(ETNode *Node)
+{
+    if (Node == NULL)
+        return;
+
+    printf(" %c", Node->Data);
+
+    ET_PreorderPrintTree(Node->Left);
+    ET_PreorderPrintTree(Node->Right);
+}
+
+void ET_InorderPrintTree(ETNode *Node)
+{
+    if (Node == NULL)
+        return;
+
+    printf("(");
+    ET_InorderPrintTree(Node->Left);
+
+    printf("%c", Node->Data);
+
+    ET_InorderPrintTree(Node->Right);
+    printf(")");
+}
+
+void ET_PostorderPrintTree(ETNode *Node)
+{
+    if (Node == NULL)
+        return;
+
+    ET_PostorderPrintTree(Node->Left);
+    ET_PostorderPrintTree(Node->Right);
+    printf(" %c", Node->Data);
 }
 
 // 코드를 한번 생각해볼 필요가 있음
